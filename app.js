@@ -1,8 +1,11 @@
+$(document).ready(function () {
+
 var user = {}
 var apiKey = '28a6f1595230053fe6ef116fa7e95a20'
 var appId = 'f0fdc783'
 var search = 'burgers'
 var gif = ''
+var userId = 0
 var questions = [{
         q: "What country you would like to taste?",
         data: ''
@@ -53,9 +56,8 @@ var database = firebase.database();
 function submitUser() {
 
 user = {
-firstName: $("#first_name").val().trim(),
-lastName: $("#last_name").val().trim(),
-email: $("#email").val().trim(),
+name: $("#userName").val().trim(),
+email: $("#userEmail").val().trim(),
 dateAdded: firebase.database.ServerValue.TIMESTAMP
 }
 
@@ -64,7 +66,7 @@ userId = foodUser.key
 console.log(userId)
 }
 
-$("#userSumbit").on("click", function(){
+$("#usersubmit").on("click", function(){
 submitUser()
 })
 
@@ -142,3 +144,4 @@ function getGiphy(gif) {
         })
     });
 }
+});
