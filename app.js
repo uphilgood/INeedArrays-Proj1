@@ -54,7 +54,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 function submitUser() {
-
+    
 user = {
 name: $("#userName").val().trim(),
 email: $("#userEmail").val().trim(),
@@ -64,9 +64,12 @@ dateAdded: firebase.database.ServerValue.TIMESTAMP
 var foodUser = database.ref().push(user);
 userId = foodUser.key
 console.log(userId)
+$("#userName").val('')
+$("#userEmail").val('')
 }
 
-$("#usersubmit").on("click", function(){
+$("#usersubmit").on("click", function(event){
+    event.preventDefault();
 submitUser()
 })
 
