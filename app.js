@@ -6,31 +6,32 @@ $(document).ready(function () {
     var search = 'burgers'
     var gif = ''
     var userId = 0
-    var questions = [
-        {q:"How hungry are you?",
-         option1: "chicken",
-         option2: "horse",
-        data: ""},
+    var questions = [{
+            q: "How hungry are you?",
+            option1: "chicken",
+            option2: "horse",
+            data: ""
+        },
         {
-            q:"How would you characterize yourself?",
+            q: "How would you characterize yourself?",
             option1: "omnivore",
             option2: "carnivore",
             option3: "herbivore",
             data: ""
 
-        },{
+        }, {
             q: "How many people will be eating?",
             data: ""
-        },{
+        }, {
             q: "Food restrictions and/or allergies?",
             data: ""
-        },{
+        }, {
             q: "Celebrating an occasion?",
             option1: "birthday",
             option2: "anniversary",
             option3: "other",
             data: ""
-        },{
+        }, {
             q: "How much time do you have to whip up this masterpiece?",
             data: ""
         }, {
@@ -41,58 +42,45 @@ $(document).ready(function () {
             option4: "Snack",
             option5: "other",
             data: ""
-        },{
+        }, {
             q: "What country do you want to eat?",
-            data:""
+            data: ""
 
-        },{q: "Do you want chicken?",
-        data: "chicken"
-    },
-    {
-        q: "Do you want seafood?",
-        data: "seafood"
-    },
-    {
-        q: "Do you want beef?",
-        data: "beef"
-    },
-    {
-        q: "Do you want pork?",
-        data: "pork"
-    },
-    {
-        q: "How much flavor do you want?",
-        data: ""
-    },
-    {
-        q: "How many people are eating?",
-        data: ""
-    },
-    {
-        q: "How old are you?",
-        data: ""
-    },
-    {
-        q: "Pick a gif that reflects your mood.",
-        data: ""
-    }, {
-        q: "Are you hungover?",
-        data: ""
-    }
-       
-       
-       
-        
-      
-      
-        
-        
-        Microwave, oven, stove, fire? (multiple choice question, one answer allowed)
-        Are you currently under THE influence? -return pizza delivery #phone
-        Date night? -pull cocktail and food recipe?
-        Starch: Rice, pasta, potatoes, bread?-if selected all the above, add no additional search param (multiple choice question, multiple answers allowed)
-        How old are you and what day of the week is it? User > 21 AND Friday or Saturday = return cocktail recipe and food recipe
-        
+        }, {
+            q: "Do you want chicken?",
+            data: "chicken"
+        },
+        {
+            q: "Do you want seafood?",
+            data: "seafood"
+        },
+        {
+            q: "Do you want beef?",
+            data: "beef"
+        },
+        {
+            q: "Do you want pork?",
+            data: "pork"
+        },
+        {
+            q: "How much flavor do you want?",
+            data: ""
+        },
+        {
+            q: "How many people are eating?",
+            data: ""
+        },
+        {
+            q: "How old are you?",
+            data: ""
+        },
+        {
+            q: "Pick a gif that reflects your mood.",
+            data: ""
+        }, {
+            q: "Are you hungover?",
+            data: ""
+        },
     ]
 
     // Initialize Firebase
@@ -203,99 +191,100 @@ $(document).ready(function () {
         });
     }
 
-// var searchTerm = "chicken";
-//     function searchD() {
-//         // var searchTerm = $("#search").val().trim();
-//         var queryURL = "https://api.edamam.com/search?q=" + searchTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10";
-//         $.ajax({
-//             url: queryURL,
-//             method: "GET"
-//         }).then(response => {
-//             // var results = response
-           
-//             // console.log(response.hits[0].recipe.label)
+    // var searchTerm = "chicken";
+    //     function searchD() {
+    //         // var searchTerm = $("#search").val().trim();
+    //         var queryURL = "https://api.edamam.com/search?q=" + searchTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10";
+    //         $.ajax({
+    //             url: queryURL,
+    //             method: "GET"
+    //         }).then(response => {
+    //             // var results = response
 
-//         });
-//     }
-// searchD();
-//     $("#searchSubmit").on("click", function (event) {
-//         // alert("something")
-//         event.preventDefault();
-//         searchD();
+    //             // console.log(response.hits[0].recipe.label)
 
-//     })
+    //         });
+    //     }
+    // searchD();
+    //     $("#searchSubmit").on("click", function (event) {
+    //         // alert("something")
+    //         event.preventDefault();
+    //         searchD();
 
-
-var randomTerms = ["vegetables","legumes","pork","poultry","beef","rice","quinoa","chocolate","yogurt","cheese","bread","pasta","fruits","fish","nuts"]
-
-function randomRecipe() {
-    var num1 = Math.floor(Math.random() * randomTerms.length)
-    var num2 = Math.floor(Math.random() * 200)
-    
-    var theRandomTerm = randomTerms[num1];
-
-    console.log(theRandomTerm)
-    var queryURL = "https://api.edamam.com/search?q=" + theRandomTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from="+ num2 + "&to=" + num2 + 1;
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(response => {
-        // var results = response
-       
-        console.log(response.hits[0].recipe.label)
-
-    });
-}
+    //     })
 
 
+    var randomTerms = ["vegetables", "legumes", "pork", "poultry", "beef", "rice", "quinoa", "chocolate", "yogurt", "cheese", "bread", "pasta", "fruits", "fish", "nuts"]
 
-function searchFood() {
-    var searchTerm = $("#searchTerms").val().trim();
-    var queryURL =
-        "https://api.edamam.com/search?q="+ searchTerm +"&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10"
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-        dataType: "json",
-    }).then(response => {
-        console.log(response.hits[0].recipe.label)
-})}
+    function randomRecipe() {
+        var num1 = Math.floor(Math.random() * randomTerms.length)
+        var num2 = Math.floor(Math.random() * 200)
 
-$("#searchSubmit").on("click",function() {
-    event.preventDefault();
-    searchFood();
+        var theRandomTerm = randomTerms[num1];
 
-})
+        console.log(theRandomTerm)
+        var queryURL = "https://api.edamam.com/search?q=" + theRandomTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=" + num2 + "&to=" + num2 + 1;
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(response => {
+            // var results = response
 
-function randomFood() {
-    var randomFoodTerms = ["pork","chicken","milk","chocolate","beef","yogurt","cheese","apple","banana","fruits","rice","spinach","kale","eggs"]
-    var termIndex = Math.floor(Math.random() * randomFoodTerms.length)
-    // console.log(randomFoodTerms[termIndex])
-    var oneResult = Math.floor(Math.random() * 30);
-    var oneResult1 = oneResult + 1;
-    var queryURL =
-        "https://api.edamam.com/search?q="+ randomFoodTerms[termIndex] +"&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=" + oneResult + "&to=" + oneResult1;
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-        dataType: "json",
-    }).then(response => {
-        console.log(response.hits[0].recipe.label)
+            console.log(response.hits[0].recipe.label)
 
-})}
+        });
+    }
 
-randomFood();
 
-$("#randomSubmit").on("click", function() {
+
+    function searchFood() {
+        var searchTerm = $("#searchTerms").val().trim();
+        var queryURL =
+            "https://api.edamam.com/search?q=" + searchTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10"
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+            dataType: "json",
+        }).then(response => {
+            console.log(response.hits[0].recipe.label)
+        })
+    }
+
+    $("#searchSubmit").on("click", function () {
+        event.preventDefault();
+        searchFood();
+
+    })
+
+    function randomFood() {
+        var randomFoodTerms = ["pork", "chicken", "milk", "chocolate", "beef", "yogurt", "cheese", "apple", "banana", "fruits", "rice", "spinach", "kale", "eggs"]
+        var termIndex = Math.floor(Math.random() * randomFoodTerms.length)
+        // console.log(randomFoodTerms[termIndex])
+        var oneResult = Math.floor(Math.random() * 30);
+        var oneResult1 = oneResult + 1;
+        var queryURL =
+            "https://api.edamam.com/search?q=" + randomFoodTerms[termIndex] + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=" + oneResult + "&to=" + oneResult1;
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+            dataType: "json",
+        }).then(response => {
+            console.log(response.hits[0].recipe.label)
+
+        })
+    }
+
     randomFood();
 
-})
+    $("#randomSubmit").on("click", function () {
+        randomFood();
+
+    })
 
 
-$('.modal').modal();
+    $('.modal').modal();
 
-randomRecipe();
+    randomRecipe();
 
 
 });
-
