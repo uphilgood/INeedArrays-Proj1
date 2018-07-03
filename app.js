@@ -6,38 +6,93 @@ $(document).ready(function () {
     var search = 'burgers'
     var gif = ''
     var userId = 0
-    var questions = [{
-            q: "What country you would like to taste?",
-            data: ''
-        },
+    var questions = [
+        {q:"How hungry are you?",
+         option1: "chicken",
+         option2: "horse",
+        data: ""},
         {
-            q: "Do you want chicken?",
-            data: "chicken"
-        },
-        {
-            q: "Do you want seafood?",
-            data: "seafood"
-        },
-        {
-            q: "Do you want beef?",
-            data: "beef"
-        },
-        {
-            q: "Do you want pork?",
-            data: "pork"
-        },
-        {
-            q: "How much flavor do you want?",
+            q:"How would you characterize yourself?",
+            option1: "omnivore",
+            option2: "carnivore",
+            option3: "herbivore",
             data: ""
-        },
-        {
-            q: "How many people are eating?",
+
+        },{
+            q: "How many people will be eating?",
             data: ""
-        },
-        {
-            q: "How old are you?",
+        },{
+            q: "Food restrictions and/or allergies?",
             data: ""
-        }
+        },{
+            q: "Celebrating an occasion?",
+            option1: "birthday",
+            option2: "anniversary",
+            option3: "other",
+            data: ""
+        },{
+            q: "How much time do you have to whip up this masterpiece?",
+            data: ""
+        }, {
+            q: "Breakfast, Lunch, or Dinner?",
+            option1: "Breakfast",
+            option2: "Lunch",
+            option3: "Dinner",
+            option4: "Snack",
+            option5: "other",
+            data: ""
+        },{
+            q: "What country do you want to eat?",
+            data:""
+
+        },{q: "Do you want chicken?",
+        data: "chicken"
+    },
+    {
+        q: "Do you want seafood?",
+        data: "seafood"
+    },
+    {
+        q: "Do you want beef?",
+        data: "beef"
+    },
+    {
+        q: "Do you want pork?",
+        data: "pork"
+    },
+    {
+        q: "How much flavor do you want?",
+        data: ""
+    },
+    {
+        q: "How many people are eating?",
+        data: ""
+    },
+    {
+        q: "How old are you?",
+        data: ""
+    },
+    {
+        q: "Pick a gif that reflects your mood.",
+        data: ""
+    }, {
+        q: "Are you hungover?",
+        data: ""
+    }
+       
+       
+       
+        
+      
+      
+        
+        
+        Microwave, oven, stove, fire? (multiple choice question, one answer allowed)
+        Are you currently under THE influence? -return pizza delivery #phone
+        Date night? -pull cocktail and food recipe?
+        Starch: Rice, pasta, potatoes, bread?-if selected all the above, add no additional search param (multiple choice question, multiple answers allowed)
+        How old are you and what day of the week is it? User > 21 AND Friday or Saturday = return cocktail recipe and food recipe
+        
     ]
 
     // Initialize Firebase
