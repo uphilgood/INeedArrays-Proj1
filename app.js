@@ -172,7 +172,7 @@ function randomFood() {
     var randomFoodTerms = ["pork","chicken","milk","chocolate","beef","yogurt","cheese","apple","banana","fruits","rice","spinach","kale","eggs"]
     var termIndex = Math.floor(Math.random() * randomFoodTerms.length)
     // console.log(randomFoodTerms[termIndex])
-    var oneResult = Math.floor(Math.random() * 200);
+    var oneResult = Math.floor(Math.random() * 30);
     var oneResult1 = oneResult + 1;
     var queryURL =
         "https://api.edamam.com/search?q="+ randomFoodTerms[termIndex] +"&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=" + oneResult + "&to=" + oneResult1;
@@ -181,7 +181,7 @@ function randomFood() {
         method: "GET",
         dataType: "json",
     }).then(response => {
-        console.log(response)
+        console.log(response.hits[0].recipe.label)
 
 })}
 
