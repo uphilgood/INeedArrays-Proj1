@@ -192,4 +192,7 @@ $("#randomSubmit").on("click", function() {
 
 })
 
+
+$('.modal').modal();
+
 });
