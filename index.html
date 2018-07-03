@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>    
+   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="../INeedArrays-Proj1/app.js"></script>
 </head>
   <body>
 
@@ -31,10 +31,12 @@
                                             <form>
                                               <div class="input-field">
                                                 <input placeholder="Search for a recipe!" id="search" type="search" required>
+                                        
                                                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                                                 <i class="material-icons">close</i>
                                               </div>
                                             </form>
+                                            <button type="button" name="submitted" id="searchSubmit">Search Submit</button>
                                           </div>
                                         </nav>
                               </li>
@@ -69,7 +71,44 @@
 
   <!-- Compiled and minified JavaScript -->
   
-  
+ <!-- Modal Trigger -->
+ 
+
+ <!-- Modal Structure -->
+ <div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4>Modal Header</h4>
+     <p>A bunch of text</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+   </div>
+ </div>  
+
+   <!-- Modal Trigger -->
+   <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+   <!-- Modal Structure -->
+   <div id="modal1" class="modal">
+     <div class="modal-content">
+       <h4>Modal Header</h4>
+       <p>A bunch of text</p>
+     </div>
+     <div class="modal-footer">
+       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+     </div>
+   </div>
+
+   <script type="text/javascript">
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+          
+</script>
+
+
   </body>
 </html>
-      
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>    
