@@ -1,8 +1,5 @@
 $(document).ready(function () {
     var newArray = [];
-    var thisQuestionAnswer = '';
-    var yourPoints = 0;
-    var totalNumOfQuestions = 10
     var trivia = {
         questions: [{
                 q: "Who won the 2017 NFL SuperBowl?",
@@ -229,7 +226,6 @@ $(document).ready(function () {
             $('#buttons-view').empty()
             $('#right').hide()
             $('#start').hide()
-            $("#points").html("<h4>" + "Correct Questions: " + yourPoints + "/" + totalNumOfQuestions +  "</h4>");
             thisQuestionAnswer = ''
             randomQuestion = this.questions[Math.floor(Math.random() * this.questions.length)];
             indOfQuestion = this.questions.indexOf(randomQuestion)
@@ -254,13 +250,12 @@ $(document).ready(function () {
             // this.questions[indOfQuestion].selected = true;
             newArray = this.questions.splice(indOfQuestion, 1)
 
-            run()
+
         },
 
         checkCorrect: function () {
 
             if (this.getAttribute("dataname") == this.getAttribute("id")) {
-                yourPoints++
                 console.log(this.getAttribute("id"))
                 $('#right').show()
                 $("#rightanswer").html("Great!  The correct answer was " + this.getAttribute("dataname"))
@@ -272,28 +267,7 @@ $(document).ready(function () {
         }
     };
 
-    function run() {
-        number = 15;
-        intervalId = ''
-
-        clearInterval(intervalId);
-        intervalId = setInterval(decrement, 1000);
-    }
-
-    function decrement() {  //  The decrement function.
-        
-        number--;  //  Decrease number by one.
-        $("#show-number").html("<h2>" + number + "</h2>"); //  Show the number in the #show-number tag.
-        if (number === 0) {  //  Once number hits zero...
-            stop(); //  ...run the stop function.
-            alert("Time Up!"); //  Alert the user that time is up.
-            trivia.random()
-        }
-    }
     
-    function stop() {  //  The stop function
-        clearInterval(intervalId);
-    }
 
     $(document).on("click", ".btn", trivia.checkCorrect);
 
