@@ -147,4 +147,9 @@ function getGiphy(gif) {
         })
     });
 }
+
+
+
+$('.modal').modal();
+
 });
