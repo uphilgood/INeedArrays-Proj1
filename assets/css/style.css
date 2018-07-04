@@ -3,7 +3,7 @@
     box-shadow: none;
 }
 
-#bodyMain{
+body{
     background-image: URL("../images/background5.jpg");
     background-size: cover;
     background-repeat: no-repeat;
