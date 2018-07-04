@@ -6,40 +6,7 @@ $(document).ready(function () {
     var search = 'burgers'
     var gif = ''
     var userId = 0
-    var questions = [{
-            q: "What country you would like to taste?",
-            data: ''
-        },
-        {
-            q: "Do you want chicken?",
-            data: "chicken"
-        },
-        {
-            q: "Do you want seafood?",
-            data: "seafood"
-        },
-        {
-            q: "Do you want beef?",
-            data: "beef"
-        },
-        {
-            q: "Do you want pork?",
-            data: "pork"
-        },
-        {
-            q: "How much flavor do you want?",
-            data: ""
-        },
-        {
-            q: "How many people are eating?",
-            data: ""
-        },
-        {
-            q: "How old are you?",
-            data: ""
-        }
-    ]
-
+   
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyD328gUii8Uy10fO3qil4RnJehneJBSeeo",
@@ -73,34 +40,34 @@ $(document).ready(function () {
         submitUser()
     })
 
-    function random() {
-        var userQuestions = questions[Math.floor(Math.random() * questions.length)];
-        var questionDiv = $("<div>")
-        $("#question-appear-here").append(questionDiv.html(userQuestions.q))
+    // function random() {
+    //     var userQuestions = questions[Math.floor(Math.random() * questions.length)];
+    //     var questionDiv = $("<div>")
+    //     $("#question-appear-here").append(questionDiv.html(userQuestions.q))
 
 
-        if (userQuestions.q.includes("Do you want")) {
+    //     if (userQuestions.q.includes("Do you want")) {
 
-            var buttonYes = $("<button>")
-            buttonYes.addClass("btn btn-primary").attr("value", "yes").text("Yes")
-            $("#question-appear-here").append(buttonYes)
-            var buttonNo = $("<button>")
-            buttonNo.addClass("btn btn-primary").attr("value", "no").text("No")
-            $("#question-appear-here").append(buttonNo)
-        } else {
-            var form = $("<form>")
-            var input = $("<input>")
-            input.attr({
-                type: "text",
-                data: userQuestions.data
-            })
-            form.append(input)
-            $("#question-appear-here").append(form)
-            $("#question-appear-here").append('<button class="btn btn-primary" id="submit-button">Submit')
-        }
-    }
+    //         var buttonYes = $("<button>")
+    //         buttonYes.addClass("btn btn-primary").attr("value", "yes").text("Yes")
+    //         $("#question-appear-here").append(buttonYes)
+    //         var buttonNo = $("<button>")
+    //         buttonNo.addClass("btn btn-primary").attr("value", "no").text("No")
+    //         $("#question-appear-here").append(buttonNo)
+    //     } else {
+    //         var form = $("<form>")
+    //         var input = $("<input>")
+    //         input.attr({
+    //             type: "text",
+    //             data: userQuestions.data
+    //         })
+    //         form.append(input)
+    //         $("#question-appear-here").append(form)
+    //         $("#question-appear-here").append('<button class="btn btn-primary" id="submit-button">Submit')
+    //     }
+    // }
 
-    random()
+    // random()
 
     function recipe() {
         var queryURL =
@@ -148,99 +115,80 @@ $(document).ready(function () {
         });
     }
 
-// var searchTerm = "chicken";
-//     function searchD() {
-//         // var searchTerm = $("#search").val().trim();
-//         var queryURL = "https://api.edamam.com/search?q=" + searchTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10";
-//         $.ajax({
-//             url: queryURL,
-//             method: "GET"
-//         }).then(response => {
-//             // var results = response
-           
-//             // console.log(response.hits[0].recipe.label)
+    function searchRecipe() {
+        $("#recipe-view").empty()
+  
+            var searchTerm = $("#searchTerms").val().trim();
+            var queryURL = "https://api.edamam.com/search?q=" + searchTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10";
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(response => {
+                response.hits.forEach(hits => 
+                $("#recipe-view").append(hits.recipe.label + "<br>")
+                )
+                // var results = response
+                console.log(hits[0].recipe.label + "<br/>")
 
-//         });
-//     }
-// searchD();
-//     $("#searchSubmit").on("click", function (event) {
-//         // alert("something")
-//         event.preventDefault();
-//         searchD();
+                // console.log(response.hits[0].recipe.label)
 
-//     })
+            });
+        
+    }
 
+        $("#searchSubmit").on("click", function (event) {
+            // alert("something")
+            event.preventDefault();
+            searchRecipe();
+            $("#searchTerms").val('')
 
-var randomTerms = ["vegetables","legumes","pork","poultry","beef","rice","quinoa","chocolate","yogurt","cheese","bread","pasta","fruits","fish","nuts"]
-
-function randomRecipe() {
-    var num1 = Math.floor(Math.random() * randomTerms.length)
-    var num2 = Math.floor(Math.random() * 200)
-    
-    var theRandomTerm = randomTerms[num1];
-
-    console.log(theRandomTerm)
-    var queryURL = "https://api.edamam.com/search?q=" + theRandomTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from="+ num2 + "&to=" + num2 + 1;
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(response => {
-        // var results = response
-       
-        console.log(response.hits[0].recipe.label)
-
-    });
-}
+        })
 
 
+    var randomTerms = ["vegetables", "legumes", "pork", "poultry", "beef", "rice", "quinoa", "chocolate", "yogurt", "cheese", "bread", "pasta", "fruits", "fish", "nuts"]
 
-function searchFood() {
-    var searchTerm = $("#searchTerms").val().trim();
-    var queryURL =
-        "https://api.edamam.com/search?q="+ searchTerm +"&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10"
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-        dataType: "json",
-    }).then(response => {
-        console.log(response.hits[0].recipe.label)
-})}
+    function randomRecipe() {
+        var num1 = Math.floor(Math.random() * randomTerms.length)
+        var num2 = Math.floor(Math.random() * 20)
+        var num3 = Math.floor(Math.random() * num2)
 
-$("#searchSubmit").on("click",function() {
-    event.preventDefault();
-    searchFood();
+        var theRandomTerm = randomTerms[num1];
 
-})
+        console.log(theRandomTerm)
+        var queryURL = "https://api.edamam.com/search?q=" + theRandomTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=" + num2;
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(response => {
+            // var results = response
+            var foodItem = response.hits
 
-function randomFood() {
-    var randomFoodTerms = ["pork","chicken","milk","chocolate","beef","yogurt","cheese","apple","banana","fruits","rice","spinach","kale","eggs"]
-    var termIndex = Math.floor(Math.random() * randomFoodTerms.length)
-    // console.log(randomFoodTerms[termIndex])
-    var oneResult = Math.floor(Math.random() * 30);
-    var oneResult1 = oneResult + 1;
-    var queryURL =
-        "https://api.edamam.com/search?q="+ randomFoodTerms[termIndex] +"&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=" + oneResult + "&to=" + oneResult1;
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-        dataType: "json",
-    }).then(response => {
-        console.log(response.hits[0].recipe.label)
+            $("#randomize-view").append(foodItem[num3].recipe.label )
 
-})}
-
-randomFood();
-
-$("#randomSubmit").on("click", function() {
-    randomFood();
-
-})
+            foodItem[num3].recipe.ingredientLines.forEach(item =>  $("#randomize-view").append(item + "<br/>")
+            
+            )
 
 
-$('.modal').modal();
 
-randomRecipe();
+
+            console.log(foodItem[num3].recipe.label)
+
+        });
+    }
+
+
+
+
+    $("#randomize").on("click", function () {
+        randomRecipe();
+
+    })
+
+
+    $('.modal').modal();
+
+
 
 
 });
-
