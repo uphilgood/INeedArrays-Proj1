@@ -2,3 +2,10 @@
     border: none;
     box-shadow: none;
 }
+
+#bodyMain{
+    background-image: URL("../images/background5.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
