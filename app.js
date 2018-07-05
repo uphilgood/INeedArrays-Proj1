@@ -124,7 +124,7 @@ $(document).ready(function () {
             // var results = response
             var foodItem = response.hits
 
-            $("#randomize-view").append(foodItem[num3].recipe.label)
+            $("#randomize-view").append("<h3>" + foodItem[num3].recipe.label + "</h3><br/>")
 
             foodItem[num3].recipe.ingredientLines.forEach(item => $("#randomize-view").append(item + "<br/>")
 
