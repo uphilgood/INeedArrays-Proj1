@@ -6,7 +6,7 @@ $(document).ready(function () {
     var search = 'burgers'
     var gif = ''
     var userId = 0
-   
+
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyD328gUii8Uy10fO3qil4RnJehneJBSeeo",
@@ -33,6 +33,7 @@ $(document).ready(function () {
         console.log(userId)
         $("#userName").val('')
         $("#userEmail").val('')
+        $("#logoNav").html("Welcome, " + user.name + "!")
     }
 
     $("#usersubmit").on("click", function (event) {
@@ -40,62 +41,13 @@ $(document).ready(function () {
         submitUser()
     })
 
-    // function random() {
-    //     var userQuestions = questions[Math.floor(Math.random() * questions.length)];
-    //     var questionDiv = $("<div>")
-    //     $("#question-appear-here").append(questionDiv.html(userQuestions.q))
-
-
-    //     if (userQuestions.q.includes("Do you want")) {
-
-    //         var buttonYes = $("<button>")
-    //         buttonYes.addClass("btn btn-primary").attr("value", "yes").text("Yes")
-    //         $("#question-appear-here").append(buttonYes)
-    //         var buttonNo = $("<button>")
-    //         buttonNo.addClass("btn btn-primary").attr("value", "no").text("No")
-    //         $("#question-appear-here").append(buttonNo)
-    //     } else {
-    //         var form = $("<form>")
-    //         var input = $("<input>")
-    //         input.attr({
-    //             type: "text",
-    //             data: userQuestions.data
-    //         })
-    //         form.append(input)
-    //         $("#question-appear-here").append(form)
-    //         $("#question-appear-here").append('<button class="btn btn-primary" id="submit-button">Submit')
-    //     }
-    // }
-
-    // random()
-
-    function recipe() {
-        var queryURL =
-            "https://api.edamam.com/search?q=burgers&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10"
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-            dataType: "jsonp",
-        }).then(response => {
-            console.log(response.hits[0].recipe)
-            response.hits.map((a) => {
-                var imageDiv = $("<div>")
-                var p = $("<p>").css('text-align', 'center').css('color', 'azure');
-                var gifImage = $("<img>")
-                gifImage.attr("src", a.recipe.image)
-                imageDiv.append(gifImage).append(p)
-                $("#gifs-appear-here").prepend(imageDiv)
-                // $("#ing-appear-here").html(a.recipe.ingredientLines)
-            })
-        });
-    }
-
     function getGiphy(gif) {
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ANL1wBop73GYuyhDonxP9gis4JaIoV58&q=" + gif +
             "&limit=10&offset=0&rating=G&lang=en";
         $.ajax({
             url: queryURL,
-            method: "GET"
+            method: "GET",
+            dataType: "jsonp",
         }).then(response => {
             var results = response.data
             results.forEach(data => {
@@ -117,32 +69,40 @@ $(document).ready(function () {
 
     function searchRecipe() {
         $("#recipe-view").empty()
-  
-            var searchTerm = $("#searchTerms").val().trim();
-            var queryURL = "https://api.edamam.com/search?q=" + searchTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10";
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(response => {
-                response.hits.forEach(hits => 
-                $("#recipe-view").append(hits.recipe.label + "<br>")
-                )
-                // var results = response
-                console.log(hits[0].recipe.label + "<br/>")
 
-                // console.log(response.hits[0].recipe.label)
+        var searchTerm = $("#searchTerms").val().trim();
+        var queryURL = "https://api.edamam.com/search?q=" + searchTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=10";
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+            dataType: "jsonp",
+        }).then(response => {
+            response.hits.forEach(function (hits) {
 
-            });
-        
+                var a = $("<a>")
+                a.addClass("waves-effect waves-light btn-small").attr
+
+                ({
+                    dataname: hits.recipe.label,
+                    href: hits.recipe.url,
+                    target: "_blank"
+                }).text(hits.recipe.label)
+
+                $('#recipe-view').append(a).append("<br/>")
+                // $("#recipe-view").append(hits.recipe.label + "<br>")
+            })
+            console.log(response.hits[0].recipe)
+
+        });
     }
 
-        $("#searchSubmit").on("click", function (event) {
-            // alert("something")
-            event.preventDefault();
-            searchRecipe();
-            $("#searchTerms").val('')
+    $("#searchSubmit").on("click", function (event) {
+        // alert("something")
+        event.preventDefault();
+        searchRecipe();
+        $("#searchTerms").val('')
 
-        })
+    })
 
 
     var randomTerms = ["vegetables", "legumes", "pork", "poultry", "beef", "rice", "quinoa", "chocolate", "yogurt", "cheese", "bread", "pasta", "fruits", "fish", "nuts"]
@@ -158,37 +118,24 @@ $(document).ready(function () {
         var queryURL = "https://api.edamam.com/search?q=" + theRandomTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=" + num2;
         $.ajax({
             url: queryURL,
-            method: "GET"
+            method: "GET",
+            dataType: "jsonp",
         }).then(response => {
             // var results = response
             var foodItem = response.hits
 
-            $("#randomize-view").append(foodItem[num3].recipe.label )
+            $("#randomize-view").append(foodItem[num3].recipe.label)
 
-            foodItem[num3].recipe.ingredientLines.forEach(item =>  $("#randomize-view").append(item + "<br/>")
-            
+            foodItem[num3].recipe.ingredientLines.forEach(item => $("#randomize-view").append(item + "<br/>")
+
             )
-
-
-
-
             console.log(foodItem[num3].recipe.label)
-
         });
     }
 
-
-
-
     $("#randomize").on("click", function () {
         randomRecipe();
-
     })
 
-
     $('.modal').modal();
-
-
-
-
 });
