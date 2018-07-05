@@ -113,6 +113,7 @@ $(document).ready(function () {
         var num3 = Math.floor(Math.random() * num2)
 
         var theRandomTerm = randomTerms[num1];
+        $("#randomize-view").empty()
 
         console.log(theRandomTerm)
         var queryURL = "https://api.edamam.com/search?q=" + theRandomTerm + "&app_id=f0fdc783&app_key=28a6f1595230053fe6ef116fa7e95a20&from=0&to=" + num2;
@@ -123,13 +124,12 @@ $(document).ready(function () {
         }).then(response => {
             // var results = response
             var foodItem = response.hits
-
-            $("#randomize-view").append("<h3>" + foodItem[num3].recipe.label + "</h3><br/>")
+            $("#randomize-view").append("<h3><a href=" + foodItem[num3].recipe.url + " target='_blank'>" + foodItem[num3].recipe.label + "</a></h3><br/>")
 
             foodItem[num3].recipe.ingredientLines.forEach(item => $("#randomize-view").append(item + "<br/>")
 
             )
-            console.log(foodItem[num3].recipe.label)
+            
         });
     }
 
