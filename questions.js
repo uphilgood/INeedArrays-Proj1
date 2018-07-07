@@ -1,15 +1,16 @@
 var i = 0;
-
+var diet = '';
+    var ingredients = null;
+    
+    var restrictions = null;
+    var caloric = null;
+    var timeToCook = null;
+    var searchTerm = null;
 
 $(document).ready(function () {
 
 
-    var diet = '';
-    var ingredients = '';
-    var restrictions = '';
-    var caloric = '';
-    var timeToCook = '';
-    var searchTerm = '';
+    
 
     function defineVariables() {
         if (i < 6) {
@@ -84,34 +85,39 @@ $(document).ready(function () {
     function checkButtonClick() {
 
         if ($(this).attr("parameter") == "diet") {
-            window.diet = $(this).val();
+            diet = $(this).val();
+            dietURL = "&diet=" + diet 
 
         }
         if ($(this).attr("parameter") == "ingredients") {
-            window.ingredients = $(this).val();
+            ingredients = $(this).val();
+            ingredientURL = "&ingr=" + ingredients
+
 
         }
         if ($(this).attr("parameter") == "timeToCook") {
             if ($(this).val() === '0-30') {
-                window.timeToCook = "30"
+                timeToCook = "30"
             } if ($(this).val() === '30-60') {
-                window.timeToCook = "60"
+                timeToCook = "60"
             } if ($(this).val() === 'All the Time in the World') {
-                window.timeToCook = ""
+                timeToCook = ""
 
-        }}
+            } timeToCookURL = "&time=" + timeToCook;
+    }
         if ($(this).attr("parameter") == "caloric") {
             if ($(this).val() === '0-1000') {
-                window.caloric = "1000"
+                caloric = "1000"
             } if ($(this).val() === '1000-1500') {
-                window.caloric = "1000-1500"
+                caloric = "1000-1500"
             } if ($(this).val() === 'YOLO') {
-                window.caloric = "0+"
+                caloric = "0+"
             } 
-
+            caloricURL = "&calories=" + caloric
         }
         if ($(this).attr("parameter") == "restrictions") {
-            window.restrictions = $(this).val();
+            restrictions = $(this).val();
+            restrictionsURL = "&healthlabels=" + restrictions;
         }
 
 
@@ -150,17 +156,30 @@ $(document).ready(function () {
     })
 
     $(document).on("click", ".buttonAnswers", checkButtonClick);
-
+    $("#next-question").on("click",function () {
+        defineVariables();
+    })
 
 })
 
 
 
 function quiz() {
-
+    if (ingredients === null) {
+        ingredientURL = ""
+    } if (diet === null) {
+        dietURL = ""
+    } if (timeToCook === null) {
+        timeToCookURL = ""
+    } if (caloric === null) {
+        caloricURL = ""
+    } if (restrictions === null) {
+        restrictionsURL = ""
+    }
     
-    var queryURL = "https://api.edamam.com/search?q=pork&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=2"
-    // var queryURL = "https://api.edamam.com/search?q=pork&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=5&ingr=" + ingredients + "&diet=" + diet + "&time=" + timeToCook + "&calories=" + caloric + "&healthlabels=" + restrictions;
+    // var queryURL = "https://api.edamam.com/search?q=pork&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=2"
+    var queryURL = "https://api.edamam.com/search?q=cake&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=5" + ingredientURL + dietURL + timeToCookURL + caloricURL + restrictionsURL;
+    
     console.log(queryURL)
         $.ajax({
             url: queryURL,
@@ -178,6 +197,8 @@ function quiz() {
             }
             
                 
+            }).fail(function (response){
+                $("#question").html("Oh No, we have no selections based on your input? <a href='http://uphilgood.github.io/INeedArrays-Proj1/#modal1'>Try Again?</a>")
             })
         
 }
