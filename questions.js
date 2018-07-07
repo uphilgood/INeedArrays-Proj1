@@ -1,18 +1,19 @@
 $(document).ready(function () {
 
     var i = 0;
-    var diet = '';
+    var diet = null;
     var ingredients = null;
 
     var restrictions = null;
     var caloric = null;
     var timeToCook = null;
     var searchTerm = null;
-    var germany = "l1IY0PZBu7H8VerKg"
-    var mexico = "3o6wreLm4TmZPfNhTy"
+
+    var germany = "3ohfFhUGrwrJ7bJP4k"
+    var mexico = "l0EryCPT7NMcc93Py"
     var america = "3osxYcwi3hCVbzNYqY"
     var japan = "OIOQN83mP9Bew"
-    var france = "3oz8xOrreBA9bexacU"
+    var france = "3oEdv7PCSvCW183t3a"
     var country = ''
 
     function defineVariables() {
@@ -107,7 +108,7 @@ $(document).ready(function () {
                 timeToCook = "60"
             }
             if ($(this).val() === 'All the Time in the World') {
-                timeToCook = ""
+                timeToCook = "0-120"
 
             }
             timeToCookURL = "&time=" + timeToCook;
@@ -120,7 +121,7 @@ $(document).ready(function () {
                 caloric = "1000-1500"
             }
             if ($(this).val() === 'YOLO') {
-                caloric = "1501-6000"
+                caloric = "0-6000"
             }
             caloricURL = "&calories=" + caloric
         }
@@ -146,7 +147,6 @@ $(document).ready(function () {
     }
 
     $(document).on("click", ".giffy", function () {
-
 
         if (this.getAttribute("id") === germany) {
             country = "german"
@@ -197,6 +197,7 @@ $(document).ready(function () {
         var newCountry = country
 
         var queryURL = "https://api.edamam.com/search?q=" + newCountry + "&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=5" + ingredientURL + dietURL + timeToCookURL + caloricURL + restrictionsURL;
+        console.log(queryURL)
         $.ajax({
             url: queryURL,
             method: "GET",
@@ -225,12 +226,13 @@ $(document).ready(function () {
         for (m = 0; m < cuisines.length; m++) {
             var cuisine = cuisines[m]
             var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=lDk3q639ddTqVr5NUUFSZEx1u8BpTfwc&q=" + cuisine + "&limit=1&offset=0&rating=G&lang=en";
+            
             $.ajax({
                 url: queryURL,
                 method: "GET",
             }).then(response => {
                 var results = response.data[0]
-
+                console.log(results)
 
                 var buttonPlace = $("#buttons-view")
                 buttonPlace.append("<img src='" + results.images.fixed_height.url + "' width='175' class='giffy' id='" + results.id + "'value='" + cuisine + "'/><br>")
