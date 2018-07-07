@@ -14,7 +14,8 @@ $(document).ready(function () {
     function defineVariables() {
         if (i < 6) {
             $("#question").html("")
-            $(".buttonAnswers").remove();
+            $(".buttonAnswers").remove()
+            $("#buttons-view").html("");
             newQuestions = [
 
                 {
@@ -196,7 +197,7 @@ function gifs() {
             var results = response.data[0]
 
             var buttonPlace = $("#buttons-view")
-            buttonPlace.append("<img src='" + results.images.fixed_height.url + "' width='175' class='giffy buttonAnswers' value='" + results.slug + "'/><br>")
+            buttonPlace.append("<img src='" + results.images.fixed_height.url + "' width='175' class='giffy' value='" + results.slug + "'/><br>")
         })
 
     }
