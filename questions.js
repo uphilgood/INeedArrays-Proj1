@@ -1,3 +1,5 @@
+$(document).ready(function () {
+
 var i = 0;
 var diet = '';
     var ingredients = null;
@@ -6,11 +8,12 @@ var diet = '';
     var caloric = null;
     var timeToCook = null;
     var searchTerm = null;
-
-$(document).ready(function () {
-
-
-    
+    var germany = "l1IY0PZBu7H8VerKg"
+    var mexico = "3o6wreLm4TmZPfNhTy"
+    var america = "3osxYcwi3hCVbzNYqY"
+    var japan = "OIOQN83mP9Bew"
+    var france = "3oz8xOrreBA9bexacU"
+    var country = ''
 
     function defineVariables() {
         if (i < 6) {
@@ -111,7 +114,7 @@ $(document).ready(function () {
             } if ($(this).val() === '1000-1500') {
                 caloric = "1000-1500"
             } if ($(this).val() === 'YOLO') {
-                caloric = "0+"
+                caloric = "1501-6000"
             } 
             caloricURL = "&calories=" + caloric
         }
@@ -123,34 +126,33 @@ $(document).ready(function () {
 
         if (i === 6) {
 
-            // var button = $("<button>")
-            // button.attr({
-            //     type: "button",
-            //     id: "resultsButton"
-            // }).text("See your Results!").addClass("waves-effect waves-light btn-large resultsButton")
             $("#question").html("");
             $("#buttons-view").html("");
-            // $("#question").append(button)
             quiz();
             $("#resultsButton").on("click", function () {
-
-                window.open("https://www.google.com")
-                $('.modal').modal().close()
                 
             })
 
         }
         
         defineVariables();
-        
-
-
     }
 
     $(document).on("click", ".giffy", function () {
         
-        window.searchTerm = $(this);
-        
+       
+        if (this.getAttribute("id") === germany) {
+            country = "german"
+        } if (this.getAttribute("id") === mexico) {
+            country = "mexican"
+        } if (this.getAttribute("id") === america) {
+            country = "american"
+        } if (this.getAttribute("id") === japan) {
+            country = "japanese"
+        } if (this.getAttribute("id") === france) {
+            country = "french"
+        } 
+
         defineVariables();
 
     })
@@ -159,10 +161,6 @@ $(document).ready(function () {
     $("#next-question").on("click",function () {
         defineVariables();
     })
-
-})
-
-
 
 function quiz() {
     if (ingredients === null) {
@@ -176,14 +174,13 @@ function quiz() {
     } if (restrictions === null) {
         restrictionsURL = ""
     }
-    
+    var newCountry = country
     // var queryURL = "https://api.edamam.com/search?q=pork&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=2"
-    var queryURL = "https://api.edamam.com/search?q=cake&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=5" + ingredientURL + dietURL + timeToCookURL + caloricURL + restrictionsURL;
-    
-    console.log(queryURL)
+    var queryURL = "https://api.edamam.com/search?q=" + newCountry + "&app_id=cc37353f&app_key=36c506cb4523a2b0efb3a66e52109bdd&from=0&to=5" + ingredientURL + dietURL + timeToCookURL + caloricURL + restrictionsURL;
         $.ajax({
             url: queryURL,
             method: "GET",
+            dataType: "jsonp",
         }).then(function (response) {
             var results = response.hits
             randomNum = Math.floor(Math.random() * 5)
@@ -192,8 +189,7 @@ function quiz() {
             
             for (j=0;j<results[1].recipe.ingredientLines.length;j++){
             var ingredientLines = results[1].recipe.ingredientLines[j]
-            console.log(ingredientLines)
-            $("#buttons-view").append("<br>" + ingredientLines + "<br/>")
+            $("#buttons-view").append("<br>" + ingredientLines + "<br/>").css("color", "white")
             }
             
                 
@@ -202,7 +198,6 @@ function quiz() {
             })
         
 }
-
 
 
 function gifs() {
@@ -217,13 +212,12 @@ function gifs() {
         }).then(response => {
             var results = response.data[0]
 
+
             var buttonPlace = $("#buttons-view")
-            buttonPlace.append("<img src='" + results.images.fixed_height.url + "' width='175' class='giffy' value='" + results.slug + "'/><br>")
+            buttonPlace.append("<img src='" + results.images.fixed_height.url + "' width='175' class='giffy' id='"+ results.id + "'value='" + cuisine+ "'/><br>")
+
         })
 
     }
-
-
-
-
 }
+})
