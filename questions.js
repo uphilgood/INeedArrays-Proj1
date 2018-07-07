@@ -116,14 +116,14 @@ $(document).ready(function () {
 
         if (i === 6) {
 
-            var button = $("<button>")
-            button.attr({
-                type: "button",
-                id: "resultsButton"
-            }).text("See your Results!").addClass("waves-effect waves-light btn-large resultsButton")
-            $("#question").html("");
-            $("#buttons-view").html("");
-            $("#question").append(button)
+            // var button = $("<button>")
+            // button.attr({
+            //     type: "button",
+            //     id: "resultsButton"
+            // }).text("See your Results!").addClass("waves-effect waves-light btn-large resultsButton")
+            // $("#question").html("");
+            // $("#buttons-view").html("");
+            // $("#question").append(button)
             quiz();
             $("#resultsButton").on("click", function () {
 
@@ -168,11 +168,12 @@ function quiz() {
             var results = response.hits
             randomNum = Math.floor(Math.random() * 5)
             var label = results[1].recipe.label
-            $("#question").html(label)
-            for (j=0;j<results[0].recipe.ingredientLines.length;j++){
-            var ingredientLines = results[0].recipe.ingredientLines[j]
+            $("#question").html("<a href='"+results[1].recipe.url+"'>"+label+"</a>")
+            // $("#buttons-view").html("<a href='"++"'>")
+            for (j=0;j<results[1].recipe.ingredientLines.length;j++){
+            var ingredientLines = results[1].recipe.ingredientLines[j]
             console.log(ingredientLines)
-            $("#button-view").append(ingredients)
+            $("#buttons-view").append("<br>" + ingredientLines + "<br/>")
             }
             
                 
