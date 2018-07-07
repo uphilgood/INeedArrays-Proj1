@@ -121,8 +121,8 @@ $(document).ready(function () {
             //     type: "button",
             //     id: "resultsButton"
             // }).text("See your Results!").addClass("waves-effect waves-light btn-large resultsButton")
-            // $("#question").html("");
-            // $("#buttons-view").html("");
+            $("#question").html("");
+            $("#buttons-view").html("");
             // $("#question").append(button)
             quiz();
             $("#resultsButton").on("click", function () {
