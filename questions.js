@@ -77,7 +77,7 @@ $(document).ready(function () {
 
 
 
-        }
+        }i++;
     }
     defineVariables();
 
@@ -136,7 +136,7 @@ $(document).ready(function () {
         }
         
         defineVariables();
-        i++;
+        
 
 
     }
@@ -144,7 +144,7 @@ $(document).ready(function () {
     $(document).on("click", ".giffy", function () {
         
         window.searchTerm = $(this);
-        i++;
+        
         defineVariables();
 
     })
@@ -170,7 +170,7 @@ function quiz() {
             randomNum = Math.floor(Math.random() * 5)
             var label = results[1].recipe.label
             $("#question").html("<a href='"+results[1].recipe.url+"'>"+label+"</a>")
-            // $("#buttons-view").html("<a href='"++"'>")
+            
             for (j=0;j<results[1].recipe.ingredientLines.length;j++){
             var ingredientLines = results[1].recipe.ingredientLines[j]
             console.log(ingredientLines)
