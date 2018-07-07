@@ -80,7 +80,7 @@ $(document).ready(function () {
             response.hits.forEach(function (hits) {
 
                 var a = $("<a>")
-                a.addClass("waves-effect waves-light btn-small").attr
+                a.addClass("center-align waves-effect waves-light light-blue btn-small").attr
 
                 ({
                     dataname: hits.recipe.label,

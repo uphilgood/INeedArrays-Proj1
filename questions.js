@@ -64,7 +64,7 @@ $(document).ready(function () {
                         type: "button",
                         value: newQuestions[i].answers[x],
                         parameter: newQuestions[i].parameter
-                    }).text(newQuestions[i].answers[x]).addClass("waves-effect waves-light btn-small buttonAnswers")
+                    }).text(newQuestions[i].answers[x]).addClass("waves-effect waves-light light-blue btn-small buttonAnswers")
                     $("#buttons-view").append(button);
                     
                     button = $("<button>")
