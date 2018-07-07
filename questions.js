@@ -197,6 +197,8 @@ function quiz() {
             }
             
                 
+            }).fail(function (response){
+                $("#question").html("Oh No, we have no selections based on your input? <a href='http://uphilgood.github.io/INeedArrays-Proj1/#modal1'>Try Again?</a>")
             })
         
 }
