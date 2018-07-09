@@ -242,22 +242,22 @@ $(document).ready(function () {
             }).then(response => {
                 var results = response.data[0]
                 id = results.id
-                if ((results.slug.includes("mexico") || results.title.includes("mexico")) === true) {
+                if (results.slug.includes("mexico") || results.title.includes("mexico")) {
                     mexico = results.id
                 }
-                if ((results.slug.includes("germany") || results.title.includes("germany")) === true) {
+                if (results.slug.includes("germany") || results.title.includes("germany")) {
                     germany = results.id
                 }
-                if ((results.slug.includes("japan") || results.title.includes("japan")) === true) {
+                if (results.slug.includes("japan") || results.title.includes("japan")) {
                     japan = results.id
                 }
-                if ((results.slug.includes("usa") || results.title.includes("usa")) === true) {
+                if (results.slug.includes("usa") || results.title.includes("usa")) {
                     america = results.id
                 }
-                if ((results.slug.includes("france") || results.title.includes("france")) === true) {
+                if (results.slug.includes("france") || results.title.includes("france")) {
                     france = results.id
                 }
-                if ((results.slug.includes("italy") || results.title.includes("italy")) === true) {
+                if (results.slug.includes("italy") || results.title.includes("italy")) {
                     italy = results.id
                 }
 
